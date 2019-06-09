@@ -22,6 +22,7 @@ int pesquisa_niver();
 int pesquisa_cep();
 void altera();
 void exclui();
+int z=0;
 
 int main()
 {
@@ -124,19 +125,19 @@ void inclui(struct dados *ps, int tam)
         exit(1);
     }
 
-    printf("DIGITE O NOME DO PERFIL: \n");//aqui os dados sao recebidos via teclado
+    printf("DIGITE O NOME DO PERFIL: ");//aqui os dados sao recebidos via teclado
     gets(ps->nome);// usar gets()
 
     printf("DIGITE O ENDERECO: ");//aqui os dados sao recebidos via teclado
     gets(ps->endereco);// usar gets()
 
-    printf("DIGITE A DIA DE NASCIMENTO: ");//aqui os dados sao recebidos via teclado
+    printf("DIGITE O DIA DE NASCIMENTO: ");//aqui os dados sao recebidos via teclado
     gets(ps->niver_dia);// usar gets()
 
-    printf("DIGITE A MES DE NASCIMENTO: ");//aqui os dados sao recebidos via teclado
+    printf("DIGITE O MES DE NASCIMENTO: ");//aqui os dados sao recebidos via teclado
     gets(ps->niver_mes);// usar gets()
 
-    printf("DIGITE A ANO DE NASCIMENTO: ");//aqui os dados sao recebidos via teclado
+    printf("DIGITE O ANO DE NASCIMENTO: ");//aqui os dados sao recebidos via teclado
     gets(ps->niver_ano);// usar gets()
 
     printf("DIGITE A CIDADE: ");//aqui os dados sao recebidos via teclado
@@ -148,8 +149,10 @@ void inclui(struct dados *ps, int tam)
     printf("DIGITE O CEP: ");//aqui os dados sao recebidos via teclado
     gets(ps->cep);// usar gets()
 
+
     fwrite(ps, tam,1,p);
     fclose(p);
+
 
     cont++;
 
@@ -190,17 +193,16 @@ void lista(struct dados *ps, int tam)
     fseek(p,comp,0);    //posiciona o ponteiro no inicio do registro dentro do arquivo
     fread(ps,sizeof(info),1,p);   //le o registro
     if(ps -> nome[0] != '*'){     //verifica se esta apagado
-    printf("\tNome: ");
+    printf("\tNOME: ");
     puts(ps->nome);
-    printf("\tEndereco: ");
+    printf("\tENDERECO: ");
     puts(ps->endereco);
-  //  printf("\tData de Aniversario: ");
-    printf("\tData de Nascimento: %s/%s/%s\n",ps->niver_dia,ps->niver_mes,ps->niver_ano);
-    printf("\tCidade: ");
+    printf("\tDATA DE NASCIMENTO: %s/%s/%s\n",ps->niver_dia,ps->niver_mes,ps->niver_ano);
+    printf("\tCIDADE: ");
     puts(ps->cidade);
-    printf("\tEstado: ");
+    printf("\tESTADO: ");
     puts(ps->estado);
-    printf("\tCep: ");
+    printf("\tCEP: ");
     puts(ps->cep);//imprimi registro na tela
     printf("\n");
 
@@ -219,7 +221,7 @@ int pesquisa_nome(struct dados *ps, int tam)
     int cont;
 
     printf("DIGITE UM NOME PARA PESQUISAR: ");
-    scanf("%s",&nome1);
+    gets(nome1);
 
     p = fopen("arquivo.txt", "r");
     a = fopen("contador.txt", "r");
@@ -243,7 +245,19 @@ int pesquisa_nome(struct dados *ps, int tam)
 
     if(nome1[x] == '\0' && ps -> nome[x] == '\0')
     {
-        printf("PERFIL NUMERO: %d\n",y);
+        printf("\tPERFIL NUMERO: %d\n",y);
+        printf("\tNOME: ");
+        puts(ps->nome);
+        printf("\tENDERECO: ");
+        puts(ps->endereco);
+        printf("\tDATA DE NASCIMENTO: %s/%s/%s\n",ps->niver_dia,ps->niver_mes,ps->niver_ano);
+        printf("\tCIDADE: ");
+        puts(ps->cidade);
+        printf("\tESTADO: ");
+        puts(ps->estado);
+        printf("\tCEP: ");
+        puts(ps->cep);
+        printf("\n");
         return y;
     }
     }
@@ -279,7 +293,19 @@ int pesquisa_letra(struct dados *ps, int tam)
     fread(ps,tam,1,p);
     if(inicial == ps -> nome[0])
     {
-        printf("NUMERO DO PERFIL COM ESSA INICIAL: %d\n",y);
+        printf("\tPERFIL NUMERO: %d\n",y);
+        printf("\tNOME: ");
+        puts(ps->nome);
+        printf("\tENDERECO: ");
+        puts(ps->endereco);
+        printf("\tDATA DE NASCIMENTO: %s/%s/%s\n",ps->niver_dia,ps->niver_mes,ps->niver_ano);
+        printf("\tCIDADE: ");
+        puts(ps->cidade);
+        printf("\tESTADO: ");
+        puts(ps->estado);
+        printf("\tCEP: ");
+        puts(ps->cep);//imprimi registro na tela
+        printf("\n");
         //return y;
     }
     }
@@ -316,7 +342,19 @@ int pesquisa_niver(struct dados *ps, int tam)
     fread(ps,tam,1,p);
      if(mes[0] == ps -> niver_mes[0]){
          if(mes[1] == ps -> niver_mes[1]){
-            printf("NUMERO DO PERFIL COM ANIVERSARIO NESSE MES: %d\n",y);
+            printf("\tPERFIL NUMERO: %d\n",y);
+            printf("\tNOME: ");
+            puts(ps->nome);
+            printf("\tENDERECO: ");
+            puts(ps->endereco);
+            printf("\tDATA DE NASCIMENTO: %s/%s/%s\n",ps->niver_dia,ps->niver_mes,ps->niver_ano);
+            printf("\tCIDADE: ");
+            puts(ps->cidade);
+            printf("\tESTADO: ");
+            puts(ps->estado);
+            printf("\tCEP: ");
+            puts(ps->cep);//imprimi registro na tela
+            printf("\n");
         }
     }
     if(mes[0] != ps -> niver_mes[0]){
@@ -336,7 +374,7 @@ int pesquisa_cep(struct dados *ps, int tam)
     int i=0,y, x;
     int cont;
 
-    printf("DIGITE UM NOME PARA PESQUISAR: ");
+    printf("DIGITE UM CEP PARA PESQUISAR: ");
     scanf("%s",&cep1);
 
     p = fopen("arquivo.txt", "r");
@@ -361,7 +399,19 @@ int pesquisa_cep(struct dados *ps, int tam)
 
     if(cep1[x] == '\0' && ps -> cep[x] == '\0')
     {
-        printf("PERFIL NUMERO: %d\n",y);
+        printf("\tPERFIL NUMERO: %d\n",y);
+        printf("\tNOME: ");
+        puts(ps->nome);
+        printf("\tENDERECO: ");
+        puts(ps->endereco);
+        printf("\tDATA DE NASCIMENTO: %s/%s/%s\n",ps->niver_dia,ps->niver_mes,ps->niver_ano);
+        printf("\tCIDADE: ");
+        puts(ps->cidade);
+        printf("\tESTADO: ");
+        puts(ps->estado);
+        printf("\tCEP: ");
+        puts(ps->cep);//imprimi registro na tela
+        printf("\n");
         return y;
     }
     }
@@ -412,10 +462,8 @@ void exclui(struct dados *ps, int tam)
 
     fseek(p,n_bytes,0);       //posioiona o ponteiro do arquivo no registro a ser apagado
     fread(ps, tam, 1, p );   //le o registro do arquivo
-    printf("nome para apagar e' %s\n",ps -> nome);
-    //apaga o registro do arquivo
-
-    printf("nome para apagar e' %s\n",ps -> nome);
+    printf("NOME QUE SERA EXCLUIDO: %s\n",ps -> nome);
+    ps->nome[0]='*';//apaga o registro do arquivo
 
     fseek(p,n_bytes,0);  //posiciona o ponteiro do arquivo no inicio do regisro a ser apagado
     fwrite(ps,tam,1,p);  //escreve o registro
